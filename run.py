@@ -3,8 +3,12 @@ import os
 import datetime
 from utils import augment_triplet, evaluate
 
-dataset = 'data/FB15k'
-path = './record'
+#  dataset = 'data/FB15k'
+#  path = './record'
+dataset = '../record/cpa'
+path = '../record'
+datalist = ['cpa', 'aut', 'tog', 'ggf']
+
 
 iterations = 2
 
@@ -39,6 +43,9 @@ if kge_model == 'TransE':
         kge_batch, kge_neg, kge_dim, kge_gamma, kge_alpha, kge_lr, kge_iters, kge_tbatch = 512, 1024, 500, 12.0, 0.5, 0.0001, 80000, 8
     if dataset.split('/')[-1] == 'wn18rr':
         kge_batch, kge_neg, kge_dim, kge_gamma, kge_alpha, kge_lr, kge_iters, kge_tbatch = 512, 1024, 500, 6.0, 0.5, 0.00005, 80000, 8
+    if dataset.split('/')[-1] in datalist:
+        kge_batch, kge_neg, kge_dim, kge_gamma, kge_alpha, kge_lr, kge_iters, kge_tbatch = 512, 256, 1000, 24.0, 1.0, 0.0001, 150000, 1
+
 
 if kge_model == 'DistMult':
     if dataset.split('/')[-1] == 'FB15k':
